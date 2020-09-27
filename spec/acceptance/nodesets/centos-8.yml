@@ -1,0 +1,31 @@
+---
+# This file is managed via modulesync
+# https://github.com/voxpupuli/modulesync
+# https://github.com/voxpupuli/modulesync_config
+HOSTS:
+  centos-8-x64:
+    platform: el-8-x86_64
+    hypervisor: docker
+    image: centos:8
+    docker_preserve_image: true
+    docker_cmd: '["/usr/sbin/init"]'
+    docker_image_commands:
+      - 'yum install -y crontabs initscripts iproute openssl tar wget which iproute'
+      - 'systemctl mask getty@tty1.service'
+      # for local development
+      - 'echo "MaxAuthTries 100" >> /etc/ssh/sshd_config'
+    mount_folders:
+      export:
+        host_path: .spec/fixtures/export
+        container_path: /export
+      data_folder:
+        host_path: .spec/fixtures/export/data_folder
+        container_path: /export/data_folder
+      homeexport:
+        host_path: .spec/fixtures/export/homeexport
+        container_path: /export/homeexport
+CONFIG:
+  trace_limit: 200
+  masterless: true
+...
+# vim: syntax=yaml

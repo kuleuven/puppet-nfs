@@ -45,6 +45,10 @@ describe 'nfs class' do
       server_service = 'nfs-server.service'
       server_servicehelpers = %w[nfs-idmap.service]
       client_services = %w[rpcbind.service rpcbind.socket]
+    when '8'
+      server_service = 'nfs-server.service'
+      server_servicehelpers = %w[nfs-idmapd.service]
+      client_services = %w[rpcbind.service]
     end
     server_packages = %w[nfs-utils nfs4-acl-tools rpcbind]
     client_packages = %w[nfs-utils nfs4-acl-tools rpcbind]
