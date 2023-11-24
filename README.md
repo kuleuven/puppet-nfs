@@ -13,7 +13,7 @@
 
 ## Module Description
 
-Github Master: [![Build Status](https://secure.travis-ci.org/derdanne/puppet-nfs.png?branch=master)](https://travis-ci.org/derdanne/puppet-nfs)
+Github Master: [![Test Suite](https://github.com/derdanne/puppet-nfs/actions/workflows/test-suite.yaml/badge.svg?branch=master)](https://github.com/derdanne/puppet-nfs/actions/workflows/test-suite.yaml)
 
 This module installs, configures and manages everything on NFS clients and servers.
 
@@ -75,7 +75,7 @@ On a client the following code is sufficient:
 
 ### Simple NFSv3 server and client example
 
-This will export /data/folder on the server and automagically mount it on client.
+This will export /data_folder on the server and automagically mount it on client.
 
 ```puppet
   node server {
@@ -341,11 +341,11 @@ This will mount /data on client in /share/data.
     - nfs
 
   nfs::server_enabled: true
-  nfs::client_enabled :  false
-  nfs::nfs_v4:  true
-  nfs::nfs_v4_idmap_domain:  %{::domain}
-  nfs::nfs_v4_export_root:  '/share'
-  nfs::nfs_v4_export_root_clients:  '192.168.0.0/24(rw,fsid=root,insecure,no_subtree_check,async,no_root_squash)'
+  nfs::client_enabled: false
+  nfs::nfs_v4: true
+  nfs::nfs_v4_idmap_domain: %{::domain}
+  nfs::nfs_v4_export_root: '/share'
+  nfs::nfs_v4_export_root_clients: '192.168.0.0/24(rw,fsid=root,insecure,no_subtree_check,async,no_root_squash)'
 
 
   nfs::nfs_exports_global:
@@ -464,12 +464,12 @@ This will mount /data on client in /share/data.
 
 ##### `nfs_v4`
   Boolean. If set to <tt>true</tt>, this module will use nfs version 4
-  for exporting and mounting nfs resources.
+  for exporting and mounting nfs resources. It defaults to <tt>true</tt>.
 
 ##### `nfs_v4_client`
   Boolean. If set to <tt>true</tt>, this module will use nfs version 4
   for mounting nfs resources. If set to <tt>false</tt> it will use nfs
-  version 3 to mount nfs resources. It defaults to the setting of `nfs_v4`
+  version 3 to mount nfs resources. It defaults to <tt>true</tt>.
 
 ##### `exports_file`
   String. It defines the location of the file with the nfs export resources used

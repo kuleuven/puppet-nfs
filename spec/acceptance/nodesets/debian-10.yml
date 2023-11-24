@@ -1,13 +1,13 @@
 HOSTS:
-  ubuntu-2004-x64:
-    platform: ubuntu-20.04-amd64
+  debian-10-x64:
+    platform: debian-10-amd64
     hypervisor: docker
-    image: ubuntu:20.04
+    image: debian:10
     docker_preserve_image: true
     docker_cmd: '["/sbin/init"]'
     docker_image_commands:
       # ensure that upstart is booting correctly in the container
-      - 'apt-get update && apt-get install -y distro-info-data locales lsb-release && locale-gen en_US.UTF-8'
+      - 'apt-get update && apt-get install -y wget'
       # for local development
       - 'echo "MaxAuthTries 100" >> /etc/ssh/sshd_config'
     # exportfs does not work on overlayfs - mounting local filesystem
